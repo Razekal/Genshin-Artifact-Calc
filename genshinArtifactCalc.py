@@ -5,23 +5,38 @@ __Date__ = "Dec 7th 2020"
 # 
 #
 
-def initializeArtifact(int rarity, string set, string mainStat, string offStatA, string offStatB, string offStatC, string offStatD)
-
-def greeting()
-def rollArtifactSlot()
-def rollArtifactMainStat(string artifactSlot)
-def rollInitialOffStat(string mainStat)
-def rollOffStat(string offStat)
-def desiredArtifactInput()
-def main()
-
 class Artifact:
-    def __init__(self, rarity, artifactSet, mainStat, offStatA, offStatB, offStatC, offStatD):
+    def __init__(self, rarity, artifactSet, artifactSlot, mainStat, offStatA, secondOffStat, thirdOffStat, fourthOffStat):
         self.rarity = rarity
         self.artifactSet = artifactSet
+        self.artifactSlot = artifactSlot
         self.mainStat = mainStat
         self.offStatA = offStatA
-        self.offstatB = offStatB
-        self.offstatC = offStatC
-        self.offstatD = offStatD
-        
+        self.secondOffStat = secondOffStat
+        self.thirdOffStat = thirdOffStat
+        self.fourthOffStat = fourthOffStat
+
+def initializeArtifact(rarity, artifactSet, artifactSlot, mainStat, offStatA, secondOffStat, thirdOffStat, fourthOffStat):
+    target = Artifact(rarity, artifactSet, artifactSlot, mainStat, offStatA, secondOffStat, thirdOffStat, fourthOffStat)
+    print(target.rarity)
+    print(target.artifactSet)
+    print(target.artifactSlot)
+    print(target.mainStat)
+    print(target.offStatA)
+    print(target.secondOffStat)
+    print(target.thirdOffStat)
+    print(target.fourthOffStat)
+
+
+
+#def greeting()
+#def rollArtifactSlot()
+#def rollArtifactMainStat(string artifactSlot)
+#def rollInitialOffStat(string mainStat)
+#def rollOffStat(string offStat)
+#def desiredArtifactInput()
+def main():
+    initializeArtifact(5, "Sojourner", "Circlet", "Critical Rate", "Attack", "Defense", "Elemental Mastery", "HP")
+    return 0
+
+main()
