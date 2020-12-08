@@ -15,3 +15,13 @@ def rollOffStat(string offStat)
 def desiredArtifactInput()
 def main()
 
+class Artifact:
+    def __init__(self, rarity, artifactSet, mainStat, offStatA, offStatB, offStatC, offStatD):
+        self.rarity = rarity
+        self.artifactSet = artifactSet
+        self.mainStat = mainStat
+        self.offStatA = offStatA
+        self.offstatB = offStatB
+        self.offstatC = offStatC
+        self.offstatD = offStatD
+        
