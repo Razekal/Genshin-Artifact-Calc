@@ -18,24 +18,40 @@ class Artifact:
 
 def initializeArtifact(rarity, artifactSet, artifactSlot, mainStat, offStatOne, offStatTwo, offStatThree, offStatFour):
     target = Artifact(rarity, artifactSet, artifactSlot, mainStat, offStatOne, offStatTwo, offStatThree, offStatFour)
-    print(target.rarity)
-    print(target.artifactSet)
-    print(target.artifactSlot)
-    print(target.mainStat)
-    print(target.offStatOne)
-    print(target.offStatTwo)
-    print(target.offStatThree)
-    print(target.offStatFour)
+    return target
 
+def userInput(message):
+    userResponse = input(message)
+    userResponse = userResponse.lower()
+    return userResponse
 
-#def greeting()
-#def rollArtifactSlot()
+def greeting():
+    print("Welcome to the Artifact Calculator.\n")
+
+def rollArtifactSlot():
+    artifactSlot = userInput("What slot is your artifact?\n")
+    while artifactSlot != "circlet" and artifactSlot != "goblet" and artifactSlot != "flower" and artifactSlot != "timepiece" and artifactSlot != "feather":
+       artifactSlot = userInput("Invalid type. What Slot is your artifact?")
+    return artifactSlot
+
+def setArtifactRarity():
+    rarity = userInput("What Rarity are you looking for?\n")
+    print("preloop" + rarity)
+    while rarity != "4" and rarity != "5":
+        rarity = userInput("Invalid. What Rarity?\n")
+        print(rarity)
+    return rarity
+
 #def rollArtifactMainStat(string artifactSlot)
 #def rollInitialOffStat(string mainStat)
 #def rollOffStat(string offStat)
 #def desiredArtifactInput()
 def main():
-    initializeArtifact(5, "Sojourner", "Circlet", "Critical Rate", "Attack", "Defense", "Elemental Mastery", "HP")
+    artifact = initializeArtifact("", "", "", "", "", "", "", "")
+    greeting()
+    artifact.rarity = setArtifactRarity()
+    artifact.artifactSlot = rollArtifactSlot()
+    print(artifact.artifactSlot)
     return 0
 
 if __name__ == "__main__":
