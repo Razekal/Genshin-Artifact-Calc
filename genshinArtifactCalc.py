@@ -6,26 +6,26 @@ __Date__ = "Dec 7th 2020"
 #
 
 class Artifact:
-    def __init__(self, rarity, artifactSet, artifactSlot, mainStat, offStatA, secondOffStat, thirdOffStat, fourthOffStat):
+    def __init__(self, rarity, artifactSet, artifactSlot, mainStat, offStatOne, offStatTwo, offStatThree, offStatFour):
         self.rarity = rarity
         self.artifactSet = artifactSet
         self.artifactSlot = artifactSlot
         self.mainStat = mainStat
-        self.offStatA = offStatA
-        self.secondOffStat = secondOffStat
-        self.thirdOffStat = thirdOffStat
-        self.fourthOffStat = fourthOffStat
+        self.offStatOne = offStatOne
+        self.offStatTwo = offStatTwo
+        self.offStatThree = offStatThree
+        self.offStatFour = offStatFour
 
-def initializeArtifact(rarity, artifactSet, artifactSlot, mainStat, offStatA, secondOffStat, thirdOffStat, fourthOffStat):
-    target = Artifact(rarity, artifactSet, artifactSlot, mainStat, offStatA, secondOffStat, thirdOffStat, fourthOffStat)
+def initializeArtifact(rarity, artifactSet, artifactSlot, mainStat, offStatOne, offStatTwo, offStatThree, offStatFour):
+    target = Artifact(rarity, artifactSet, artifactSlot, mainStat, offStatOne, offStatTwo, offStatThree, offStatFour)
     print(target.rarity)
     print(target.artifactSet)
     print(target.artifactSlot)
     print(target.mainStat)
-    print(target.offStatA)
-    print(target.secondOffStat)
-    print(target.thirdOffStat)
-    print(target.fourthOffStat)
+    print(target.offStatOne)
+    print(target.offStatTwo)
+    print(target.offStatThree)
+    print(target.offStatFour)
 
 
 
