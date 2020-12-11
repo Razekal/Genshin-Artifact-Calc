@@ -42,7 +42,23 @@ def setArtifactRarity():
         print(rarity)
     return rarity
 
-#def rollArtifactMainStat(string artifactSlot)
+def rollArtifactMainStat(string artifactSlot)
+    if artifactSlot = "circlet":
+        pass
+    elif artifactSlot = "goblet"
+        pass
+    elif artifactSlot = "feather"
+        pass
+    elif artifactSlot = "timepiece"
+        pass
+    elif artifactSlot = "flower"
+        pass
+    return 0 #needs variable to return
+
+def setArtifactMainStat():
+    mainStat = userInput("What Main Stat for the artifact are you looking for?") #Needs conditionals
+    return mainStat
+
 #def rollInitialOffStat(string mainStat)
 #def rollOffStat(string offStat)
 #def desiredArtifactInput()
@@ -50,7 +66,8 @@ def main():
     artifact = initializeArtifact("", "", "", "", "", "", "", "")
     greeting()
     artifact.rarity = setArtifactRarity()
-    artifact.artifactSlot = rollArtifactSlot()
+    artifact.artifactSlot = setArtifactSlot()
+    artifact.mainStat = setArtifactMainStat()
     print(artifact.artifactSlot)
     return 0
 
