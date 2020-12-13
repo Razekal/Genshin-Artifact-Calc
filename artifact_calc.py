@@ -27,6 +27,8 @@ def initializeArtifact(rarity, artifactSet, artifactSlot, mainStat, offStatOne, 
     print(target.offStatThree)
     print(target.offStatFour)
 
+def basic_fn():
+    return 2
 
 
 #def greeting()
