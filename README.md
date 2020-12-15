@@ -15,6 +15,6 @@ how much resin you will need, on average, to find that artifact.
 
 Tests can be run using `pytest`:
 ```
-pip3 install pytest
-pytest # in project root
+pip3 install pytest pytest-cov
+pytest --cov=artifact_calc # in project root
 ```

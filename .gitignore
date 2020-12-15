@@ -3,5 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# pytest-cov
+.coverage
+
 # Vim
 .*.sw[op]
