@@ -28,7 +28,6 @@ def initializeArtifact(rarity, artifactSet, artifactSlot, mainStat, offStatOne, 
     print(target.offStatFour)
 
 
-
 #def greeting()
 #def rollArtifactSlot()
 #def rollArtifactMainStat(string artifactSlot)
@@ -39,4 +38,5 @@ def main():
     initializeArtifact(5, "Sojourner", "Circlet", "Critical Rate", "Attack", "Defense", "Elemental Mastery", "HP")
     return 0
 
-main()
+if __name__ == "__main__":
+    main()
