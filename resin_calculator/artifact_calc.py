@@ -6,58 +6,58 @@ __Date__ = "Dec 7th 2020"
 #
 
 class Artifact:
-    def __init__(self, rarity, artifactSet, artifactSlot, mainStat, offStatOne, offStatTwo, offStatThree, offStatFour):
+    def __init__(self, rarity, artifact_set, artifact_slot, main_stat, off_stat_one, off_stat_two, off_stat_three, off_stat_four):
         self.rarity = rarity
-        self.artifactSet = artifactSet
-        self.artifactSlot = artifactSlot
-        self.mainStat = mainStat
-        self.offStatOne = offStatOne
-        self.offStatTwo = offStatTwo
-        self.offStatThree = offStatThree
-        self.offStatFour = offStatFour
+        self.artifact_set = artifact_set
+        self.artifact_slot = artifact_slot
+        self.main_stat = main_stat
+        self.off_stat_one = off_stat_one
+        self.off_stat_two = off_stat_two
+        self.off_stat_three = off_stat_three
+        self.off_stat_four = off_stat_four
 
-def initializeArtifact(rarity, artifactSet, artifactSlot, mainStat, offStatOne, offStatTwo, offStatThree, offStatFour):
-    target = Artifact(rarity, artifactSet, artifactSlot, mainStat, offStatOne, offStatTwo, offStatThree, offStatFour)
+def initializeArtifact(rarity, artifact_set, artifact_slot, main_stat, off_stat_one, off_stat_two, off_stat_three, off_stat_four):
+    target = Artifact(rarity, artifact_set, artifact_slot, main_stat, off_stat_one, off_stat_two, off_stat_three, off_stat_four)
     return target
 
-def userInput(message):
-    userResponse = input(message)
-    userResponse = userResponse.lower()
-    return userResponse
+def user_input(message):
+    user_response = input(message)
+    user_response = user_response.lower()
+    return user_response
 
 def greeting():
     print("Welcome to the Artifact Calculator.\n")
 
-def rollArtifactSlot():
-    artifactSlot = userInput("What slot is your artifact?\n")
-    while artifactSlot != "circlet" and artifactSlot != "goblet" and artifactSlot != "flower" and artifactSlot != "timepiece" and artifactSlot != "feather":
-       artifactSlot = userInput("Invalid type. What Slot is your artifact?")
-    return artifactSlot
+def select_artifact_slot():
+    artifact_slot = user_input("What slot is your artifact?\n")
+    while artifact_slot != "circlet" and artifact_slot != "goblet" and artifact_slot != "flower" and artifact_slot != "timepiece" and artifact_slot != "feather":
+       artifact_slot = user_input("Invalid type. What Slot is your artifact?")
+    return artifact_slot
 
-def setArtifactRarity():
-    rarity = userInput("What Rarity are you looking for?\n")
+def select_artifact_rarity():
+    rarity = user_input("What Rarity are you looking for?\n")
     print("preloop" + rarity)
     while rarity != "4" and rarity != "5":
-        rarity = userInput("Invalid. What Rarity?\n")
+        rarity = user_input("Invalid. What Rarity?\n")
         print(rarity)
     return rarity
 
-def rollArtifactMainStat(string artifactSlot)
-    if artifactSlot = "circlet":
+def roll_artifact_main_stat(artifact_slot):
+    if artifact_slot == "circlet":
         pass
-    elif artifactSlot = "goblet"
+    elif artifact_slot == "goblet":
         pass
-    elif artifactSlot = "feather"
+    elif artifact_slot == "feather":
         pass
-    elif artifactSlot = "timepiece"
+    elif artifact_slot == "timepiece":
         pass
-    elif artifactSlot = "flower"
+    elif artifact_slot == "flower":
         pass
     return 0 #needs variable to return
 
-def setArtifactMainStat():
-    mainStat = userInput("What Main Stat for the artifact are you looking for?") #Needs conditionals
-    return mainStat
+def select_artifact_main_stat():
+    main_stat = user_input("What Main Stat for the artifact are you looking for?") #Needs conditionals
+    return main_stat
 
 #def rollInitialOffStat(string mainStat)
 #def rollOffStat(string offStat)
@@ -65,10 +65,10 @@ def setArtifactMainStat():
 def main():
     artifact = initializeArtifact("", "", "", "", "", "", "", "")
     greeting()
-    artifact.rarity = setArtifactRarity()
-    artifact.artifactSlot = setArtifactSlot()
-    artifact.mainStat = setArtifactMainStat()
-    print(artifact.artifactSlot)
+    artifact.rarity = select_artifact_rarity()
+    artifact.artifact_slot = select_artifact_slot()
+    artifact.mainStat = select_artifact_main_stat()
+    print(artifact.artifact_slot)
     return 0
 
 if __name__ == "__main__":
