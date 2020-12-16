@@ -1,7 +1,6 @@
 import re
 
-from .context import artifact_calc
-
+import artifact_calc
 
 def test_artifact_init(capsys):
     artifact_calc.initializeArtifact(4, "", "", "", "", "", "", "")

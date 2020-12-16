@@ -6,7 +6,7 @@ _Catchy description about Genshin and why you might use this tool_
 
 Run the program with:
 ```
-python artifact_calc.py
+python resin_calculator/artifact_calc.py
 ```
 Follow the prompts to describe your ideal artifact. The program will calculate
 how much resin you will need, on average, to find that artifact.
