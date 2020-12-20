@@ -29,9 +29,22 @@ def greeting():
     print("Welcome to the Artifact Calculator.\n")
 
 def select_artifact_slot():
+    valid_slot = 0
     artifact_slot = user_input("What slot is your artifact?\n")
-    while artifact_slot != "circlet" and artifact_slot != "goblet" and artifact_slot != "flower" and artifact_slot != "timepiece" and artifact_slot != "feather":
-       artifact_slot = user_input("Invalid type. What Slot is your artifact?")
+    while valid_slot == 0:
+        if artifact_slot == "circlet":
+            valid_slot = 1
+        elif artifact_slot == "timepiece":
+            valid_slot = 1
+        elif artifact_slot == "goblet":
+            valid_slot = 1
+        elif artifact_slot == "feather":
+            valid_slot = 1
+        elif artifact_slot == "flower":
+            valid_slot = 1
+        else:
+            print("Invalid artifact slot. Options are \"circlet\", \"timepiece\", \"goblet\", \"feather\", or \"flower\"")
+    
     return artifact_slot
 
 def select_artifact_rarity():
@@ -61,14 +74,23 @@ def select_artifact_main_stat():
 
 #def rollInitialOffStat(string mainStat)
 #def rollOffStat(string offStat)
-#def desiredArtifactInput()
+def desired_artifact_input():
+    rarity = select_artifact_rarity()
+    #off_stat_count = rarity_off_stat()
+    artifact_set = 0#select_artifact_set()
+    artifact_slot = select_artifact_slot()
+    main_stat = select_artifact_main_stat()
+    off_stat_one = 0#select_off_stat(off_stat_count)
+    off_stat_two = 0#select_off_stat(off_stat_count)
+    off_stat_three = 0#select_off_stat(off_stat_count)
+    off_stat_four = 0#select_off_stat(off_stat_count)
+    target_artifact = Artifact(rarity, artifact_slot, artifact_set, main_stat, off_stat_one, off_stat_two, off_stat_three, off_stat_four)
+    return target_artifact
+
+
+
 def main():
-    artifact = initializeArtifact("", "", "", "", "", "", "", "")
     greeting()
-    artifact.rarity = select_artifact_rarity()
-    artifact.artifact_slot = select_artifact_slot()
-    artifact.mainStat = select_artifact_main_stat()
-    print(artifact.artifact_slot)
     return 0
 
 if __name__ == "__main__":
