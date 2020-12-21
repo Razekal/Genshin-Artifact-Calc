@@ -6,18 +6,15 @@ __Date__ = "Dec 7th 2020"
 #
 
 class Artifact:
-    def __init__(self, rarity, artifact_set, artifact_slot, main_stat, off_stat_one, off_stat_two, off_stat_three, off_stat_four):
+    def __init__(self, rarity, artifact_set, artifact_slot, main_stat, off_stats):
         self.rarity = rarity
         self.artifact_set = artifact_set
         self.artifact_slot = artifact_slot
         self.main_stat = main_stat
-        self.off_stat_one = off_stat_one
-        self.off_stat_two = off_stat_two
-        self.off_stat_three = off_stat_three
-        self.off_stat_four = off_stat_four
+        self.off_stats = off_stats
 
-def initializeArtifact(rarity, artifact_set, artifact_slot, main_stat, off_stat_one, off_stat_two, off_stat_three, off_stat_four):
-    target = Artifact(rarity, artifact_set, artifact_slot, main_stat, off_stat_one, off_stat_two, off_stat_three, off_stat_four)
+def initializeArtifact(rarity, artifact_set, artifact_slot, main_stat, off_stats):
+    target = Artifact(rarity, artifact_set, artifact_slot, main_stat, off_stats)
     return target
 
 def user_input(message):
@@ -29,19 +26,12 @@ def greeting():
     print("Welcome to the Artifact Calculator.\n")
 
 def select_artifact_slot():
-    valid_slot = 0
-    artifact_slot = user_input("What slot is your artifact?\n")
-    while valid_slot == 0:
-        if artifact_slot == "circlet":
-            valid_slot = 1
-        elif artifact_slot == "timepiece":
-            valid_slot = 1
-        elif artifact_slot == "goblet":
-            valid_slot = 1
-        elif artifact_slot == "feather":
-            valid_slot = 1
-        elif artifact_slot == "flower":
-            valid_slot = 1
+    valid_slot = False
+    slots = ["circlet", "timepiece", "goblet", "feather", "flower"]
+    while valid_slot == False:
+        artifact_slot = user_input("What slot is your artifact?\n")
+        if artifact_slot in slots:
+            valid_slot = True
         else:
             print("Invalid artifact slot. Options are \"circlet\", \"timepiece\", \"goblet\", \"feather\", or \"flower\"")
     
@@ -49,11 +39,11 @@ def select_artifact_slot():
 
 def select_artifact_rarity():
     rarity = user_input("What Rarity are you looking for?\n")
-    print("preloop" + rarity)
+#    print("preloop" + rarity) #debug print
     while rarity != "4" and rarity != "5":
         rarity = user_input("Invalid. What Rarity?\n")
-        print(rarity)
-    return rarity
+#        print(rarity) #debug print
+    return int(rarity)
 
 def roll_artifact_main_stat(artifact_slot):
     if artifact_slot == "circlet":
@@ -80,11 +70,8 @@ def desired_artifact_input():
     artifact_set = 0#select_artifact_set()
     artifact_slot = select_artifact_slot()
     main_stat = select_artifact_main_stat()
-    off_stat_one = 0#select_off_stat(off_stat_count)
-    off_stat_two = 0#select_off_stat(off_stat_count)
-    off_stat_three = 0#select_off_stat(off_stat_count)
-    off_stat_four = 0#select_off_stat(off_stat_count)
-    target_artifact = Artifact(rarity, artifact_slot, artifact_set, main_stat, off_stat_one, off_stat_two, off_stat_three, off_stat_four)
+    off_stats = 0#select_off_stats(off_stat_count)
+    target_artifact = Artifact(rarity, artifact_slot, artifact_set, main_stat, off_stats)
     return target_artifact
 
 
