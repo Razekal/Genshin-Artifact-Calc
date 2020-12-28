@@ -1,8 +1,15 @@
 import re
 
+import io
+
 import artifact_calc
 
-def test_artifact_init(capsys):
-    artifact_calc.initializeArtifact(4, "", "", "", "", "", "", "")
-    output = capsys.readouterr().out
-    assert re.search("^4", output) is not None
+def test_validate_rarity():
+    assert artifact_calc.validate_rarity("4") == True
+    assert artifact_calc.validate_rarity("s") == False
+    assert artifact_calc.validate_rarity(4) == False
+    assert artifact_calc.validate_rarity("5") == True
+    assert artifact_calc.validate_rarity("3") == True
+    assert artifact_calc.validate_rarity("2") == False
+    assert artifact_calc.validate_rarity("1") == False
+    assert artifact_calc.validate_rarity("6") == False

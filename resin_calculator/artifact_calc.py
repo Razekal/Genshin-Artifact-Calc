@@ -3,7 +3,9 @@ __Date__ = "Dec 7th 2020"
 
 #Program Purpose: To calculate the estimated Resin, Mora, and Artifact EXP requirements of finding an artifact you want in Genshin Impact.
 # 
-#
+#Todo: Set up upgrade counter for offstats. split validations to own functions.
+
+
 
 valid_main_stats_by_slot = {
     "feather": "atk",
@@ -45,13 +47,19 @@ def select_artifact_slot():
     
     return artifact_slot
 
+def validate_rarity(rarity):
+    return rarity == "3" or rarity == "4" or rarity == "5"
+
 def select_artifact_rarity():
-    rarity = user_input("What Rarity are you looking for?\n")
-    #print("preloop" + rarity) #debug print
-    while rarity != "3" and rarity != "4" and rarity != "5": 
-        rarity = user_input("Invalid. What Rarity?\n")
-        #print(rarity) #debug print
-    return int(rarity)
+
+    valid_rarity = False
+    while valid_rarity == False:
+        rarity = user_input("What Rarity are you looking for?\n")
+        if validate_rarity(rarity):
+            return rarity
+        else:
+            print("invalid rarity\n")
+
 
 def roll_artifact_main_stat(artifact_slot):
     if artifact_slot == "circlet":
