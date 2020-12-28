@@ -5,6 +5,22 @@ __Date__ = "Dec 7th 2020"
 # 
 #
 
+valid_main_stats_by_slot = {
+    "feather": "atk",
+    "flower": "hp",
+    "circlet": ["hp%", "def%", "atk%", "elemental mastery", "crit rate", "crit damage", "healing%"],
+    "timepiece": ["hp%", "def%", "atk%", "elemental mastery", "recharge"],
+    "goblet": ["hp%", "def%", "atk%", "elemental mastery", "elemental damage", "physical damage"]
+}
+
+valid_sets_by_rarity = {
+    4: ["instructor", "berserker", "exile", "resolution of sojourner", "martial artist", "defender's will", 
+        "tiny miracle", "brave heart", "gambler", "scholar", "prayer"],
+    5: ["gladiator's", "wanderer's troupe", "viridescent venerer", "thundering fury", "thundersoother"
+        "crimson witch of flames", "lavawalker", "archaic petra", "retracing bolide", "maiden beloved"
+        "noblesse oblige", "bloodstained chivalry"]
+}
+
 class Artifact:
     def __init__(self, rarity, artifact_set, artifact_slot, main_stat, off_stats):
         self.rarity = rarity
@@ -61,38 +77,20 @@ def roll_artifact_main_stat(artifact_slot):
 def select_artifact_main_stat(artifact_slot):
     main_stat = ""
     valid_stat = False
-    if artifact_slot != "flower" and "feather":
-        print("What Main Stat for the artifact are you looking for?\n")
     if artifact_slot == "flower":
         print("Flowers can only be flat HP")
-        main_stat = "HP"
+        return "HP"
     elif artifact_slot == "feather":
         print("Feathers can only be flat Attack")
-        main_stat = "ATK"
-    elif artifact_slot == "circlet":
-        slot_options = ["hp%", "def%", "atk%", "elemental mastery", "crit rate", "crit damage", "healing%"]
+        return "ATK"
+    else:
+        print("What Main Stat for the artifact are you looking for?\n")
         while valid_stat == False:
-            main_stat = user_input("options are hp%, def%, atk%, elemental mastery, crit rate, crit damage, healing%\n")
-            if main_stat in slot_options:
+            main_stat = user_input("options are " + ", ".join(valid_main_stats_by_slot[artifact_slot]))
+            if main_stat in valid_main_stats_by_slot[artifact_slot]:
                 valid_stat = True
-            elif main_stat not in slot_options:
+            else:
                 print("Invalid choice.\n")
-    elif artifact_slot == "timepiece":
-        slot_options = ["hp%", "def%", "atk%", "elemental mastery", "recharge"]
-        while valid_stat == False:
-            main_stat = user_input("options are hp%, def%, atk%, elemental mastery, and recharge")
-            if main_stat in slot_options:
-                valid_stat = True
-            elif main_stat not in slot_options:
-                print("Invalid choice. \n")
-    elif artifact_slot == "goblet":
-        slot_options = ["hp%", "def%", "atk%", "elemental mastery", "elemental damage", "physical damage"]
-        while valid_stat == False:
-            main_stat = user_input("options are hp%, def%, atk%, elemental mastery, elemental damage, and physical damage")
-            if main_stat in slot_options:
-                valid_stat = True
-            elif main_stat not in slot_options:
-                print("Invalid choice. \n")
     return main_stat
 
 #def rollInitialOffStat(string mainStat)
@@ -126,29 +124,19 @@ def select_off_stats(rarity, main_stat):
 ###
 
 def select_artifact_set(rarity):
-    if rarity == 3 or rarity == 4:
-        valid_choice = False
-        valid_sets = ["instructor", "berserker", "exile", "resolution of sojourner", "martial artist", "defender's will", 
-                      "tiny miracle", "brave heart", "gambler", "scholar", "prayer"
-                      "gladiator's", "wanderer's troupe", "viridescent venerer", "thundering fury", "thundersoother"
-                      "crimson witch of flames", "lavawalker", "archaic petra", "retracing bolide", "maiden beloved"
-                      "noblesse oblige", "bloodstained chivalry"]
-        while valid_choice == False:
-            artifact_set = user_input("What set are you looking for?")
-            if artifact_set not in valid_sets:
-                print("Invalid Choice\n")
-            else:
-                valid_choice = True
-    elif rarity == 5:
-        valid_sets = ["gladiator's", "wanderer's troupe", "viridescent venerer", "thundering fury", "thundersoother"
-                      "crimson witch of flames", "lavawalker", "archaic petra", "retracing bolide", "maiden beloved"
-                      "noblesse oblige", "bloodstained chivalry"]
-        while valid_choice == False:
-            artifact_set = user_input("What set are you looking for?")
-            if artifact_set not in valid_sets:
-                print("Invalid Choice\n")
-            else:
-                valid_choice = True
+    valid_sets = ["gladiator's", "wanderer's troupe", "viridescent venerer", "thundering fury", "thundersoother"
+                  "crimson witch of flames", "lavawalker", "archaic petra", "retracing bolide", "maiden beloved"
+                  "noblesse oblige", "bloodstained chivalry"]
+    if rarity < 5:
+        valid_sets = valid_sets + ["instructor", "berserker", "exile", "resolution of sojourner", "martial artist", "defender's will", 
+                      "tiny miracle", "brave heart", "gambler", "scholar", "prayer"]
+    valid_choice = False
+    while valid_choice == False:
+        artifact_set = user_input("What set are you looking for?")
+        if artifact_set in valid_sets:
+            valid_choice = True
+        else:
+            print("Invalid Choice\n")
     return artifact_set
 
 def desired_artifact_input():
@@ -157,7 +145,7 @@ def desired_artifact_input():
     artifact_slot = select_artifact_slot()
     main_stat = select_artifact_main_stat(artifact_slot)
     off_stats = select_off_stats(rarity, main_stat)
-    target_artifact = Artifact(rarity, artifact_slot, artifact_set, main_stat, off_stats)
+    target_artifact = Artifact(rarity, artifact_set, artifact_slot, main_stat, off_stats)
     return target_artifact
 
 
@@ -165,7 +153,7 @@ def desired_artifact_input():
 def main():
     greeting()
     created_artifact = desired_artifact_input()
-    print(created_artifact.artifact_set)
+    print("\n\n\n"+ created_artifact.artifact_set)
     print(created_artifact.rarity)
     print(created_artifact.main_stat)
     print(created_artifact.artifact_slot)
