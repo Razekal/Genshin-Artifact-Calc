@@ -86,34 +86,30 @@ def select_artifact_main_stat(artifact_slot):
     return main_stat
 
 #def rollInitialOffStat(string mainStat)
+
 def select_off_stats(rarity, main_stat):
-    total_rolls = (2*rarity)-1
     selected_rolls = 0
+    if rarity == 4:
+        selected_rolls += 1 #causes off_stat selection to loop one less time
     sub_stats = ["hp", "hp%", "atk", "atk%", "def%", "def", "elemental mastery", "recharge%", "crit rate", "crit damage"]
-    off_stats = ["", "", "", ""]
+    off_stats = []
     starting_rolls = user_input("Do you want the artifact to drop with full sub-stats?")
     if starting_rolls == "no":
-        total_rolls = total_rolls - 1 #Relevant when off stat upgrades are implemented
-    while selected_rolls < 3:
+        selected_rolls += 1 #causes off_stat selection to loop one less time
+    while selected_rolls <= 3:
         valid_choice = False
         while valid_choice == False:
             stat_choice = user_input("what substat do you want?\n")
-            if stat_choice in sub_stats:
+            if stat_choice in sub_stats and stat_choice != main_stat and stat_choice not in off_stats:
                 valid_choice = True
             else: 
                 print("Invalid Choice\n") 
-        selected_rolls = selected_rolls + 1
-        off_stats[selected_rolls] = stat_choice
+        selected_rolls += 1
+        off_stats.append(stat_choice)
     return off_stats
-### Come back to this later, get the initial set up first. Create off_stat_upgrade() and implement there.
 
-#    while selected_rolls >= 4:
-#        print("Current stats are:\n")
-#        for x in off_stats:
-#            counter = 1
-#            print(counter + ": " + x + "\n")
-#        user_input("What stat do you want to upgrade?")
-###
+#def select_off_stat_upgrade(off_stats):
+    
 
 def select_artifact_set(rarity):
     valid_sets = ["gladiator's", "wanderer's troupe", "viridescent venerer", "thundering fury", "thundersoother"
