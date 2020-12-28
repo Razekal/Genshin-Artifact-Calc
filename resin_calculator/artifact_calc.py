@@ -13,14 +13,6 @@ valid_main_stats_by_slot = {
     "goblet": ["hp%", "def%", "atk%", "elemental mastery", "elemental damage", "physical damage"]
 }
 
-valid_sets_by_rarity = {
-    4: ["instructor", "berserker", "exile", "resolution of sojourner", "martial artist", "defender's will", 
-        "tiny miracle", "brave heart", "gambler", "scholar", "prayer"],
-    5: ["gladiator's", "wanderer's troupe", "viridescent venerer", "thundering fury", "thundersoother"
-        "crimson witch of flames", "lavawalker", "archaic petra", "retracing bolide", "maiden beloved"
-        "noblesse oblige", "bloodstained chivalry"]
-}
-
 class Artifact:
     def __init__(self, rarity, artifact_set, artifact_slot, main_stat, off_stats):
         self.rarity = rarity
