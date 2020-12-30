@@ -23,9 +23,6 @@ class Artifact:
         self.main_stat = main_stat
         self.off_stats = off_stats
 
-def initializeArtifact(rarity, artifact_set, artifact_slot, main_stat, off_stats):
-    target = Artifact(rarity, artifact_set, artifact_slot, main_stat, off_stats)
-    return target
 
 def user_input(message):
     user_response = input(message)
