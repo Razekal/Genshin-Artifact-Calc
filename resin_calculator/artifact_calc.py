@@ -1,12 +1,12 @@
 __Author__ = "William Schuy"
 __Date__ = "Dec 7th 2020"
 
-#Program Purpose: To calculate the estimated Resin, Mora, and Artifact EXP requirements of finding an artifact you want in Genshin Impact.
+#Program Purpose: To calculate the estimated Resin, Mora, and Artifact EXP requirements of finding an artifact you want in 
+#                 Genshin Impact.
 # 
-#Todo: Set up upgrade counter for offstats. split validations to own functions.
+#Todo: Reorder code to make editing easier (i.e. reorder definitions to be in the same order they are called by the program.)
 
-
-
+#Lists what main stats can occur on each artifact slot
 valid_main_stats_by_slot = {
     "feather": "atk",
     "flower": "hp",
@@ -15,8 +15,22 @@ valid_main_stats_by_slot = {
     "goblet": ["hp%", "def%", "atk%", "elemental mastery", "elemental damage", "physical damage"]
 }
 
-#Not sure if valid substats should be placed in the sub stat validation function, or if I should leave as is.
+#list of the five slots an artifact can drop as
+valid_artifact_slots = ["circlet", "timepiece", "goblet", "feather", "flower"]
+
+#list of all possible secondary stats that can occur. 
+#Only conditional requirement is that secondary stats cannot match main stats or other secondaries.
 valid_sub_stats = ["atk", "hp", "def", "atk%", "hp%", "def%", "elemental mastery", "crit rate", "crit damage", "recharge"]
+
+#List of all artifact sets that can go to the highest rarity. Note that these can drop as three or four star rarities as well.
+valid_artifact_sets_five_rarity = [ "gladiator's", "wanderer's troupe", "viridescent venerer", "thundering fury",
+                                "thundersoother", "crimson witch of flames", "lavawalker", "archaic petra",
+                                 "retracing bolide", "maiden beloved", "noblesse oblige", "bloodstained chivalry"]
+
+#Adds artifact sets that cap at four star rarity to the list of artifact set above.
+valid_artifact_sets_any_rarity = valid_artifact_sets_five_rarity + ["instructor", "berserker", "exile",
+                                "resolution of sojourner",  "martial artist", "defender's will", 
+                                "tiny miracle", "brave heart", "gambler", "scholar", "prayer"] 
 
 class Artifact:
     def __init__(self, rarity, artifact_set, artifact_slot, main_stat, off_stats):
@@ -37,16 +51,15 @@ def greeting():
 
 def select_artifact_slot():
     valid_slot = False
-    valid_artifact_slots = ["circlet", "timepiece", "goblet", "feather", "flower"]
     while valid_slot == False:
         artifact_slot = user_input("What slot is your artifact?\n")
-        if validate_artifact_slots(artifact_slot, valid_artifact_slots):
+        if validate_artifact_slots(artifact_slot):
             return artifact_slot
         else:
-            print("Invalid artifact slot. Options are \"circlet\", \"timepiece\", \"goblet\", \"feather\", or \"flower\"\n")
+            print("Invalid artifact slot. Options are " + ", ".join(valid_artifact_slots))
 
-def validate_artifact_slots(artifact_slot, valid_slots):
-    return artifact_slot in valid_slots
+def validate_artifact_slots(artifact_slot):
+    return artifact_slot in valid_artifact_slots
 
 def validate_rarity(rarity):
     return rarity == "3" or rarity == "4" or rarity == "5"
@@ -62,7 +75,7 @@ def select_artifact_rarity():
             print("invalid rarity\n")
 
 
-def roll_artifact_main_stat(artifact_slot): #framework for math logic later
+def roll_artifact_main_stat(artifact_slot): #framework for math logic later, currently does nothing
     if artifact_slot == "circlet":
         pass
     elif artifact_slot == "goblet":
@@ -125,22 +138,19 @@ def validate_off_stats(stat_choice, off_stats, main_stat):
     
 
 def select_artifact_set(rarity):
-    valid_sets = ["gladiator's", "wanderer's troupe", "viridescent venerer", "thundering fury", "thundersoother"
-                  "crimson witch of flames", "lavawalker", "archaic petra", "retracing bolide", "maiden beloved"
-                  "noblesse oblige", "bloodstained chivalry"]
-    if rarity < 5:
-        valid_sets = valid_sets + ["instructor", "berserker", "exile", "resolution of sojourner", "martial artist", "defender's will", 
-                      "tiny miracle", "brave heart", "gambler", "scholar", "prayer"]
     valid_choice = False
     while valid_choice == False:
         artifact_set = user_input("What set are you looking for?")
-        if validate_set_selection(artifact_set, valid_sets):
+        if validate_set_selection(rarity, artifact_set):
             return artifact_set
         else:
             print("Invalid Choice\n")
 
-def validate_set_selection(artifact_set, valid_sets):
-    return artifact_set in valid_sets
+def validate_set_selection(rarity, artifact_set):
+    if rarity < 5: 
+        return artifact_set in valid_artifact_sets_any_rarity
+    elif rarity == 5: 
+        return artifact_set in valid_artifact_sets_five_rarity
 
 def desired_artifact_input():
     rarity = select_artifact_rarity()
