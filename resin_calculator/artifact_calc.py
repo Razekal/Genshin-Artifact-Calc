@@ -53,19 +53,18 @@ def select_artifact_slot():
     valid_slot = False
     while valid_slot == False:
         artifact_slot = user_input("What slot is your artifact?\n")
-        if validate_artifact_slots(artifact_slot):
+        if validate_artifact_slot(artifact_slot):
             return artifact_slot
         else:
             print("Invalid artifact slot. Options are " + ", ".join(valid_artifact_slots))
 
-def validate_artifact_slots(artifact_slot):
+def validate_artifact_slot(artifact_slot):
     return artifact_slot in valid_artifact_slots
 
 def validate_rarity(rarity):
     return rarity == "3" or rarity == "4" or rarity == "5"
 
 def select_artifact_rarity():
-
     valid_rarity = False
     while valid_rarity == False:
         rarity = user_input("What Rarity are you looking for?\n")
