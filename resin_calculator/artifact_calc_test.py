@@ -111,5 +111,21 @@ def test_validate_set_selection():
     assert artifact_calc.validate_set_selection(4, "pray") == False
     assert artifact_calc.validate_set_selection(4, 5) == False
 
+def test_validate_off_stats():
+    assert artifact_calc.validate_off_stats("crit rate", [], "atk%") == True
+    assert artifact_calc.validate_off_stats("crit rate", [], "crit rate") == False
+    assert artifact_calc.validate_off_stats(1, [], "atk%") == False
+    assert artifact_calc.validate_off_stats("crit rate", ["crit rate"], "atk%") == False
+    assert artifact_calc.validate_off_stats("", [], "atk%") == False
+    assert artifact_calc.validate_off_stats("crit rate", [], "atk%") == True
+    assert artifact_calc.validate_off_stats("crit damage", [], "atk%") == True
+    assert artifact_calc.validate_off_stats("atk", [], "atk%") == True
+    assert artifact_calc.validate_off_stats("def", [], "atk%") == True
+    assert artifact_calc.validate_off_stats("def%", [], "atk%") == True
+    assert artifact_calc.validate_off_stats("hp", [], "atk%") == True
+    assert artifact_calc.validate_off_stats("hp%", [], "atk%") == True
+    assert artifact_calc.validate_off_stats("elemental mastery", [], "atk%") == True
+    assert artifact_calc.validate_off_stats("recharge", [], "atk%") == True
+    assert artifact_calc.validate_off_stats("atk%", [], "def%") == True
 
     
