@@ -7,7 +7,7 @@ __Date__ = "Dec 7th 2020"
 #Todo: Reorder code to make editing easier (i.e. reorder definitions to be in the same order they are called by the program.)
 
 #Lists what main stats can occur on each artifact slot
-valid_main_stats_by_slot = {
+VALID_MAIN_STATS_BY_SLOT = {
     "feather": "atk",
     "flower": "hp",
     "circlet": ["hp%", "def%", "atk%", "elemental mastery", "crit rate", "crit damage", "healing%"],
@@ -16,19 +16,19 @@ valid_main_stats_by_slot = {
 }
 
 #list of the five slots an artifact can drop as
-valid_artifact_slots = ["circlet", "timepiece", "goblet", "feather", "flower"]
+VALID_ARTIFACT_SLOTS = ["circlet", "timepiece", "goblet", "feather", "flower"]
 
 #list of all possible secondary stats that can occur. 
 #Only conditional requirement is that secondary stats cannot match main stats or other secondaries.
-valid_sub_stats = ["atk", "hp", "def", "atk%", "hp%", "def%", "elemental mastery", "crit rate", "crit damage", "recharge"]
+VALID_SUB_STATS = ["atk", "hp", "def", "atk%", "hp%", "def%", "elemental mastery", "crit rate", "crit damage", "recharge"]
 
 #List of all artifact sets that can go to the highest rarity. Note that these can drop as three or four star rarities as well.
-valid_artifact_sets_five_rarity = [ "gladiator's", "wanderer's troupe", "viridescent venerer", "thundering fury",
+VALID_ARTIFACT_SETS_FIVE_RARITY = [ "gladiator's", "wanderer's troupe", "viridescent venerer", "thundering fury",
                                 "thundersoother", "crimson witch of flames", "lavawalker", "archaic petra",
                                  "retracing bolide", "maiden beloved", "noblesse oblige", "bloodstained chivalry"]
 
 #Adds artifact sets that cap at four star rarity to the list of artifact set above.
-valid_artifact_sets_any_rarity = valid_artifact_sets_five_rarity + ["instructor", "berserker", "exile",
+VALID_ARTIFACT_SETS_ANY_RARITY = VALID_ARTIFACT_SETS_FIVE_RARITY + ["instructor", "berserker", "exile",
                                 "resolution of sojourner",  "martial artist", "defender's will", 
                                 "tiny miracle", "brave heart", "gambler", "scholar", "prayer"] 
 
@@ -56,10 +56,10 @@ def select_artifact_slot():
         if validate_artifact_slot(artifact_slot):
             return artifact_slot
         else:
-            print("Invalid artifact slot. Options are " + ", ".join(valid_artifact_slots))
+            print("Invalid artifact slot. Options are " + ", ".join(VALID_ARTIFACT_SLOTS))
 
 def validate_artifact_slot(artifact_slot):
-    return artifact_slot in valid_artifact_slots
+    return artifact_slot in VALID_ARTIFACT_SLOTS
 
 def validate_rarity(rarity):
     return rarity == "3" or rarity == "4" or rarity == "5"
@@ -99,14 +99,14 @@ def select_artifact_main_stat(artifact_slot):
     else:
         print("What Main Stat for the artifact are you looking for?\n")
         while valid_stat == False:
-            main_stat = user_input("options are " + ", ".join(valid_main_stats_by_slot[artifact_slot]))
+            main_stat = user_input("options are " + ", ".join(VALID_MAIN_STATS_BY_SLOT[artifact_slot]))
             if validate_main_stat(artifact_slot, main_stat):
                 return main_stat
             else:
                 print("Invalid choice.\n")
 
 def validate_main_stat(slot, main_stat):
-    return main_stat in valid_main_stats_by_slot[slot]
+    return main_stat in VALID_MAIN_STATS_BY_SLOT[slot]
 
 #def rollInitialOffStat(string mainStat)
 
@@ -131,7 +131,7 @@ def select_off_stats(rarity, main_stat):
     return off_stats
 
 def validate_off_stats(stat_choice, off_stats, main_stat):
-    return stat_choice in valid_sub_stats and stat_choice != main_stat and stat_choice not in off_stats
+    return stat_choice in VALID_SUB_STATS and stat_choice != main_stat and stat_choice not in off_stats
 
 #def select_off_stat_upgrade(off_stats):
     
@@ -147,9 +147,9 @@ def select_artifact_set(rarity):
 
 def validate_set_selection(rarity, artifact_set):
     if rarity < 5: 
-        return artifact_set in valid_artifact_sets_any_rarity
+        return artifact_set in VALID_ARTIFACT_SETS_ANY_RARITY
     elif rarity == 5: 
-        return artifact_set in valid_artifact_sets_five_rarity
+        return artifact_set in VALID_ARTIFACT_SETS_FIVE_RARITY
 
 def desired_artifact_input():
     rarity = select_artifact_rarity()
