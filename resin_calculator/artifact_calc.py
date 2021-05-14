@@ -41,29 +41,28 @@ class Artifact:
         self.off_stats = off_stats
 
 
-def user_input(message):
-    user_response = input(message)
-    user_response = user_response.lower() #converts all inputs to lowercase to error-proof user inputs
-    return user_response
 
-def greeting():
-    print("Welcome to the Artifact Calculator.\n")
 
-def select_artifact_slot():
-    valid_slot = False
-    while valid_slot == False:
-        artifact_slot = user_input("What slot is your artifact?\n")
-        if validate_artifact_slot(artifact_slot):
-            return artifact_slot
-        else:
-            print("Invalid artifact slot. Options are " + ", ".join(VALID_ARTIFACT_SLOTS))
+#VALIDATION FUNCTIONS BLOCK
+def validate_rarity(rarity):
+    return rarity == "3" or rarity == "4" or rarity == "5"
+
+def validate_set_selection(rarity, artifact_set):
+    if rarity < 5: 
+        return artifact_set in VALID_ARTIFACT_SETS_ANY_RARITY
+    elif rarity == 5: 
+        return artifact_set in VALID_ARTIFACT_SETS_FIVE_RARITY
 
 def validate_artifact_slot(artifact_slot):
     return artifact_slot in VALID_ARTIFACT_SLOTS
 
-def validate_rarity(rarity):
-    return rarity == "3" or rarity == "4" or rarity == "5"
+def validate_main_stat(slot, main_stat):
+    return main_stat in VALID_MAIN_STATS_BY_SLOT[slot]
 
+def validate_off_stats(stat_choice, off_stats, main_stat):
+    return stat_choice in VALID_SUB_STATS and stat_choice != main_stat and stat_choice not in off_stats
+
+#SELECTION FUNCTIONS BLOCK
 def select_artifact_rarity():
     valid_rarity = False
     while valid_rarity == False:
@@ -73,19 +72,23 @@ def select_artifact_rarity():
         else:
             print("invalid rarity\n")
 
+def select_artifact_set(rarity):
+    valid_choice = False
+    while valid_choice == False:
+        artifact_set = user_input("What set are you looking for?")
+        if validate_set_selection(rarity, artifact_set):
+            return artifact_set
+        else:
+            print("Invalid Choice\n")
 
-def roll_artifact_main_stat(artifact_slot): #framework for math logic later, currently does nothing
-    if artifact_slot == "circlet":
-        pass
-    elif artifact_slot == "goblet":
-        pass
-    elif artifact_slot == "feather":
-        pass
-    elif artifact_slot == "timepiece":
-        pass
-    elif artifact_slot == "flower":
-        pass
-    return 0 #needs variable to return
+def select_artifact_slot():
+    valid_slot = False
+    while valid_slot == False:
+        artifact_slot = user_input("What slot is your artifact?\n")
+        if validate_artifact_slot(artifact_slot):
+            return artifact_slot
+        else:
+            print("Invalid artifact slot. Options are " + ", ".join(VALID_ARTIFACT_SLOTS))
 
 def select_artifact_main_stat(artifact_slot):
     main_stat = ""
@@ -104,11 +107,6 @@ def select_artifact_main_stat(artifact_slot):
                 return main_stat
             else:
                 print("Invalid choice.\n")
-
-def validate_main_stat(slot, main_stat):
-    return main_stat in VALID_MAIN_STATS_BY_SLOT[slot]
-
-#def rollInitialOffStat(string mainStat)
 
 def select_off_stats(rarity, main_stat):
     selected_rolls = 0
@@ -130,27 +128,25 @@ def select_off_stats(rarity, main_stat):
                 print("Invalid Choice\n") 
     return off_stats
 
-def validate_off_stats(stat_choice, off_stats, main_stat):
-    return stat_choice in VALID_SUB_STATS and stat_choice != main_stat and stat_choice not in off_stats
-
 #def select_off_stat_upgrade(off_stats):
-    
 
-def select_artifact_set(rarity):
-    valid_choice = False
-    while valid_choice == False:
-        artifact_set = user_input("What set are you looking for?")
-        if validate_set_selection(rarity, artifact_set):
-            return artifact_set
-        else:
-            print("Invalid Choice\n")
+#ROLLING FUNCTIONS
+def roll_artifact_main_stat(artifact_slot): #framework for math logic later, currently does nothing
+    if artifact_slot == "circlet":
+        pass
+    elif artifact_slot == "goblet":
+        pass
+    elif artifact_slot == "feather":
+        pass
+    elif artifact_slot == "timepiece":
+        pass
+    elif artifact_slot == "flower":
+        pass
+    return 0 #needs variable to return
 
-def validate_set_selection(rarity, artifact_set):
-    if rarity < 5: 
-        return artifact_set in VALID_ARTIFACT_SETS_ANY_RARITY
-    elif rarity == 5: 
-        return artifact_set in VALID_ARTIFACT_SETS_FIVE_RARITY
+#def rollInitialOffStat(string mainStat)
 
+#USER EXPERIENCE FUNCTIONS
 def desired_artifact_input():
     rarity = select_artifact_rarity()
     artifact_set = select_artifact_set(rarity)
@@ -160,7 +156,13 @@ def desired_artifact_input():
     target_artifact = Artifact(rarity, artifact_set, artifact_slot, main_stat, off_stats)
     return target_artifact
 
+def user_input(message):
+    user_response = input(message)
+    user_response = user_response.lower() #converts all inputs to lowercase to error-proof user inputs
+    return user_response
 
+def greeting():
+    print("Welcome to the Artifact Calculator.\n")
 
 def main():
     greeting()
