@@ -43,7 +43,8 @@ class Artifact:
 
 
 
-#VALIDATION FUNCTIONS BLOCK
+##### VALIDATION FUNCTIONS #####
+
 def validate_rarity(rarity):
     return rarity == "3" or rarity == "4" or rarity == "5"
 
@@ -62,7 +63,8 @@ def validate_main_stat(slot, main_stat):
 def validate_off_stats(stat_choice, off_stats, main_stat):
     return stat_choice in VALID_SUB_STATS and stat_choice != main_stat and stat_choice not in off_stats
 
-#SELECTION FUNCTIONS BLOCK
+##### SELECTION FUNCTIONS #####
+
 def select_artifact_rarity():
     valid_rarity = False
     while valid_rarity == False:
@@ -130,7 +132,8 @@ def select_off_stats(rarity, main_stat):
 
 #def select_off_stat_upgrade(off_stats):
 
-#ROLLING FUNCTIONS
+##### ROLLING FUNCTIONS #####
+
 def roll_artifact_main_stat(artifact_slot): #framework for math logic later, currently does nothing
     if artifact_slot == "circlet":
         pass
@@ -146,7 +149,8 @@ def roll_artifact_main_stat(artifact_slot): #framework for math logic later, cur
 
 #def rollInitialOffStat(string mainStat)
 
-#USER EXPERIENCE FUNCTIONS
+##### USER EXPERIENCE FUNCTIONS #####
+
 def desired_artifact_input():
     rarity = select_artifact_rarity()
     artifact_set = select_artifact_set(rarity)
